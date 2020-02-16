@@ -1,0 +1,11 @@
+// See default bootstrap variables to be overridden here:
+// https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
+//$primary: #3498db;
+//$secondary: #e67e22;
+//$success: #2ecc71;
+//$danger: #e74c3c;
+// import bootstrap after override because of internal ! operator
+.text-weight-bold {
+  font-weight: bold;
+}
+@import "~bootstrap/scss/bootstrap.scss";
