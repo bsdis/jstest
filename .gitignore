@@ -1,7 +1,7 @@
 node_modules
 .vscode
 index.html
-static/js*
+static/js/*
 frontend/package-lock.json
 ### Django ###
 *.log
