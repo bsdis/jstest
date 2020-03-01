@@ -1,7 +1,8 @@
 import React, { useState, MouseEvent } from "react";
 import { Navbar, Nav, NavDropdown, FormControl, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import SignupTypeList from "../SignupTypeList";
+//import SignupTypeList from "../SignupTypeList";
+import Register from "../Register";
 const theme = require("./Header.scss");
 
 export default function Header() {
@@ -16,11 +17,9 @@ export default function Header() {
     <>
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="/">SoulSistahh</Navbar.Brand>
-
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto"></Nav>
-
           <Form inline>
             <Nav.Link className="text-weight-bold" href="#home">
               Opret gruppe
@@ -32,7 +31,7 @@ export default function Header() {
           </Form>
         </Navbar.Collapse>
       </Navbar>
-      <SignupTypeList
+      <Register
         open={showSignupModal}
         closeAction={() => setShowSignupModal(false)}
       />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+//import jwtDecode from "jwt-decode";
 import {
   Button,
   FormGroup,
@@ -37,10 +37,10 @@ export default function Login() {
       })
       .then(function(res) {
         console.log("====");
-        let dec = jwtDecode<TokenDto>(res.data["access"]);
+        //let dec = jwtDecode<TokenDto>(res.data["access"]);
         localStorage.setItem("jwt_accesst", res.data["access"]);
         localStorage.setItem("jwt_requestt", res.data["refresh"]);
-        localStorage.setItem("jwt_exp", dec.exp.toString());
+        //localStorage.setItem("jwt_exp", dec.exp.toString());
       });
     //.then(res => localStorage.setItem("jwt", res.data));
     // axios.get(webApiUrl, { headers: {"Authorization" : `Bearer ${tokenStr}`} });
