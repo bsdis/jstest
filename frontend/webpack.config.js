@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const i18nextWebpackPlugin = require('i18next-scanner-webpack'); 
 
 const isDevelopment = true; //process.env.NODE_ENV === "development";
 console.log(isDevelopment);
@@ -50,6 +51,22 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: path.resolve(__dirname, "..", "[name].[hash].css"),
       chunkFilename: "[id].[hash].css"
+    }),
+    new i18nextWebpackPlugin({
+      options: {
+        func: {
+          // default ['i18next.t', 'i18n.t']
+          list: ['t', '$t', 'i18next.t', 'i18n.t'],
+          // default ['.js', '.jsx', '.vue']
+          extensions: ['.js', '.jsx', '.tsx']
+        },
+        lngs: ['en', 'de'],
+        // both defaults to {{lng}}/{{ns}}.json
+        resource: {
+          loadPath: '{{lng}}/{{ns}}.json',
+          savePath: '{{lng}}/{{ns}}.json'
+        }
+      }
     })
   ]
 };
