@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm, FormContext, ErrorMessage } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 // See https://github.com/i18next/react-i18next/blob/master/test/typescript/examples.test.tsx
 import {
@@ -40,6 +41,7 @@ export default function Register({
   closeAction
 }: InferProps<typeof Register.propTypes>) {
   const { t, i18n } = useTranslation();
+  let history = useHistory();
 
   const methods = useForm<FormData>({
     validationSchema: Yup.object().shape({
@@ -59,11 +61,85 @@ export default function Register({
   });
   const { register, handleSubmit, watch, errors } = methods;
 
-  const onSubmit = handleSubmit(
+  interface User {
+    id: number;
+    username: string;
+    email: string;
+  }
+  interface ServerData {
+    token: string;
+    user: User;
+  }
+  interface ServerResponse {
+    data: ServerData;
+  }
+
+  const onSubmit = (indata: FormData) => {
+    /*
+    axios
+      .request<ServerData>({
+        method: "post",
+        url: "/api/profiles/auth/register",
+        data: {
+          username: indata.username,
+          email: indata.email,
+          password: indata.password
+        },
+        transformResponse: (r: ServerResponse) => r.data
+      })
+      .then(response => {
+        // `response` is of type `AxiosResponse<ServerData>`
+        const { data } = response;
+        console.log(data);
+        // `data` is of type ServerData, correctly inferred
+      });
+      */
+
+    axios
+      .post<ServerData>("/api/profiles/auth/register", {
+        username: indata.username,
+        email: indata.email,
+        password: indata.password
+      })
+      .then(function(res: ServerResponse) {
+        localStorage.setItem("tkn", res.data.token);
+        closeAction();
+        history.push("/");
+        console.log("====");
+        console.log(res.data);
+        console.log("====");
+        //let dec = jwtDecode<TokenDto>(res.data["access"]);
+        //localStorage.setItem("jwt_accesst", res.data["access"]);
+        //localStorage.setItem("jwt_requestt", res.data["refresh"]);
+        //localStorage.setItem("jwt_exp", dec.exp.toString());
+      });
+  };
+  /*
+  const onSubmit = data => {
+    alert(JSON.stringify(data));
+  };*/
+  /*
+  const onSubmit2 = handleSubmit(
     ({ username, email, password, repeatpassword }) => {
+      //http://127.0.0.1:8000/api/profiles/auth/register
+      axios
+        .post("/api/profiles/auth/register", {
+          username: username,
+          email: email,
+          password: password
+        })
+        .then(function(res) {
+          console.log("====");
+          console.log(res.data);
+          console.log("====");
+          //let dec = jwtDecode<TokenDto>(res.data["access"]);
+          //localStorage.setItem("jwt_accesst", res.data["access"]);
+          //localStorage.setItem("jwt_requestt", res.data["refresh"]);
+          //localStorage.setItem("jwt_exp", dec.exp.toString());
+        });
       console.log({ username, email, password, repeatpassword });
     }
-  );
+  );*/
 
   return (
     <>
@@ -85,9 +161,9 @@ export default function Register({
               </Form>
             </Navbar.Collapse>
           </Navbar>
-
+          {/*data => console.log(data)*/}
           <FormContext {...methods}>
-            <Form onSubmit={handleSubmit(data => console.log(data))} noValidate>
+            <Form onSubmit={handleSubmit(onSubmit)} noValidate>
               <FormGroup controlId="username">
                 <FormLabel>{t("Username")}</FormLabel>
                 <FormControl

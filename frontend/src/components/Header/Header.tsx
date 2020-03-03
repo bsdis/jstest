@@ -24,6 +24,7 @@ export default function Header() {
             <Nav.Link className="text-weight-bold" href="#home">
               Opret gruppe
             </Nav.Link>
+
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="#" onClick={handleSignupClick}>
               Sign up
