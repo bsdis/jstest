@@ -1,5 +1,7 @@
 import { ProductItem } from "../global";
 
+//const USER_INITIAL_STATE: ProductItem[] = [
+
 const INITIAL_STATE: ProductItem[] = [
   {
     id: "123",

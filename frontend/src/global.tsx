@@ -6,3 +6,4 @@ export interface ProductItem {
   imageUrl: string;
   added?: boolean;
 }
+export interface ProfileItem {}

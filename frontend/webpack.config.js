@@ -3,10 +3,10 @@ const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const i18nextWebpackPlugin = require('i18next-scanner-webpack'); 
+const i18nextWebpackPlugin = require("i18next-scanner-webpack");
 
 const isDevelopment = true; //process.env.NODE_ENV === "development";
-console.log(isDevelopment);
+
 module.exports = {
   mode: "development",
   watch: true,
@@ -56,15 +56,16 @@ module.exports = {
       options: {
         func: {
           // default ['i18next.t', 'i18n.t']
-          list: ['t', '$t', 'i18next.t', 'i18n.t'],
+          list: ["t", "$t", "i18next.t", "i18n.t"],
           // default ['.js', '.jsx', '.vue']
-          extensions: ['.js', '.jsx', '.tsx']
+          extensions: [".js", ".jsx", ".tsx"]
         },
-        lngs: ['en', 'de'],
+        lngs: ["en", "de"],
+        interpolation: { escapeValue: false },
         // both defaults to {{lng}}/{{ns}}.json
         resource: {
-          loadPath: '{{lng}}/{{ns}}.json',
-          savePath: '{{lng}}/{{ns}}.json'
+          loadPath: "{{lng}}/{{ns}}.json",
+          savePath: "{{lng}}/{{ns}}.json"
         }
       }
     })
