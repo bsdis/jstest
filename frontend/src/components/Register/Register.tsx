@@ -155,6 +155,7 @@ export default function Register({
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto"></Nav>
               <Form inline>
+                {t("teststring")}
                 <Nav.Link className="text-weight-bold" href="#">
                   {t("Login")}
                 </Nav.Link>

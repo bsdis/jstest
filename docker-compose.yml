@@ -1,0 +1,9 @@
+version: "3"
+services:
+  db:
+    image: "postgres -e POSTGRES_PASSWORD=123456 -d postgres"
+    ports:
+      - "8001:5432"
+
+
+      docker run --name some-postgres --net host -e POSTGRES_PASSWORD=mysecretpassword -d postgres
